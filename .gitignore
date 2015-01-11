@@ -13,7 +13,6 @@ vendor/bundle/
 spec/reports
 doc/*.html
 .rspec
-/Gemfile.local
 spec/javascripts/lib
 bower_components
 node_modules
