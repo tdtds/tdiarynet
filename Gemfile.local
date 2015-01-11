@@ -1,0 +1,4 @@
+ruby '2.2.0'
+gem 'tdiary-io-mongodb'
+gem 'tdiary-contrib'
+gem 'thin'
