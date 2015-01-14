@@ -16,3 +16,4 @@ doc/*.html
 spec/javascripts/lib
 bower_components
 node_modules
+/public
