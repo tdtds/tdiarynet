@@ -46,6 +46,8 @@ if @conf['amazon.bitly'] and @conf['bitly.login'] and @conf['bitly.key'] then
 	add_js_setting( '$tDiary.plugin.bitly.apiKey', "'#{@conf['bitly.key']}'" )
 end
 
+class AmazonRedirectError < StandardError; end
+
 def amazon_fetch( url, limit = 10 )
 	raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
@@ -56,12 +58,11 @@ def amazon_fetch( url, limit = 10 )
 	when Net::HTTPSuccess
 		res.body
 	when Net::HTTPRedirection
+		puts "amazon.rb: redirect #{url}"
 		amazon_fetch( res['location'].untaint, limit - 1 )
-	when [Net::HTTPFatalError, Net::HTTPServerException]
-		puts "amazon.rb: retry #{url}"
-		amazon_fetch( url, limit - 1 )
+	when Net::HTTPForbidden, Net::HTTPServiceUnavailable
+		raise AmazonRedirectError.new( limit.to_s )
 	else
-		puts res.error!
 		raise ArgumentError, res.error!
 	end
 end
@@ -82,10 +83,14 @@ def amazon_call_ecs( asin, id_type, country )
 	url << "&ResponseGroup=Medium"
 	url << "&Version=#{@amazon_require_version}"
 
+	limit = 10
 	begin
-		Timeout.timeout( 10 ) do
+		Timeout.timeout( limit ) do
 			amazon_fetch( url )
 		end
+	rescue AmazonRedirectError
+		limit = $!.message.to_i
+		retry
 	rescue ArgumentError
 	end
 end
