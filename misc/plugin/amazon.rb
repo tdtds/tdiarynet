@@ -58,7 +58,6 @@ def amazon_fetch( url, limit = 10 )
 	when Net::HTTPSuccess
 		res.body
 	when Net::HTTPRedirection
-		puts "amazon.rb: redirect #{url}"
 		amazon_fetch( res['location'].untaint, limit - 1 )
 	when Net::HTTPForbidden, Net::HTTPServiceUnavailable
 		raise AmazonRedirectError.new( limit.to_s )
