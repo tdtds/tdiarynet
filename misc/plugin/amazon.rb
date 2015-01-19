@@ -57,6 +57,9 @@ def amazon_fetch( url, limit = 10 )
 		res.body
 	when Net::HTTPRedirection
 		amazon_fetch( res['location'].untaint, limit - 1 )
+	when Net::HTTPFatalError
+		p "amazon.rb: retry #{url}"
+		amazon_fetch( url, limit - 1 )
 	else
 		raise ArgumentError, res.error!
 	end
