@@ -3,6 +3,7 @@
 #
 
 def navi
+	@options['dropdown_calendar.label'] = ''
 	result = %Q[<div class="adminmenu">\n]
 	result << navi_user
 	result << navi_admin
@@ -29,10 +30,4 @@ else
 	def navi_prev_nyear(date); "前日"; end
 	def navi_next_nyear(date); "次日"; end
 end
-
-# <br>
-def br;  '<br>'; end
-def brr; '<br style="clear: right;">'; end
-def brl; '<br style="clear: left;">'; end
-def brb; '<br style="clear: both;">'; end
 
