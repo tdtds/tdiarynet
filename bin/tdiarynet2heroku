@@ -1,0 +1,48 @@
+#!/bin/sh
+
+function hconf() {
+	echo "$1=`heroku config:get $1 --app tdiary-net-tdtds`"
+	return 0
+}
+
+user_name="$1"
+twitter_name="$2"
+if [ -z "$twitter_name" ]; then
+	echo "usage: `basename $0` <user_name> <twitter_name>"
+	exit
+fi
+
+app="tdiary-net-${user_name}"
+
+### making an app on heroku
+heroku apps:create "${app}"
+heroku addons:add mongolab --app "${app}"
+heroku addons:add sendgrid --app "${app}"
+heroku config:set "TDIARYNET_USER=${user_name}" `hconf TWITTER_KEY` `hconf TWITTER_SECRET` "TWITTER_NAME=${twitter_name}"
+heroku domains:add "#{user_name}.tdiary.net" --app "${app}"
+
+### copying data to mongolab
+pwd="`pwd`"
+data="${pwd}/data/${app}"
+mongo=`heroku config:get MONGOLAB_URI --app "${app}"`
+
+mkdir "data/${app}"
+scp -r "tdiarynet:/home/tdiary/users/${user_name}/data/????" "data/${app}/"
+scp "tdiarynet:/home/tdiary/users/${user_name}/data/tdiary.conf" "data/${app}/"
+cd ../tdiary/io/mongodb
+bundle exec bin/tdiary-mongodb-convert -c "${data}/tdiary.conf" -m "${mongo}"
+bundle exec bin/tdiary-mongodb-convert -s "${pwd}/lib/tdiary/style" -m "${mongo}" "${data}"
+cd "${pwd}"
+rm -rf "data/${app}"
+
+### starting web site
+echo "use "GitHub Integration" on Heroku"
+echo "  open https://dashboard.heroku.com/apps/${app}/code/github"
+echo "  and connect to tdtds/tdiarynet"
+echo "  and set automatic deploy without CI"
+echo "  then do manual deploy."
+echo
+
+### setting up DNS and old images
+echo "set DNS CNAME #{user_name} to ${app}.herokuapp.com."
+echo "make symlink of ${user_name} under ~/tdiary/users/www/userimages"
