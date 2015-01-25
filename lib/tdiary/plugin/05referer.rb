@@ -15,9 +15,9 @@ add_header_proc do
 end
 
 def referer_save_trigger
-	return unless @conf.io_class.to_s == 'TDiary::IO::Default'
+	return unless @conf.io_class == TDiary::IO::Default
 	return unless @mode =~ /^(latest|day|edit|append|replace)$/
-
+puts '!!! goto save referer !!!'
 	if @date then
 		diary = @diaries[@date.strftime( '%Y%m%d' )]
 		diary.clear_referers if diary
