@@ -19,7 +19,7 @@ heroku apps:create "${app}"
 heroku addons:add mongolab --app "${app}"
 heroku addons:add sendgrid --app "${app}"
 heroku addons:add papertrail --app "${app}"
-heroku config:set "TDIARYNET_USER=${user_name}" `hconf TWITTER_KEY` `hconf TWITTER_SECRET` "TWITTER_NAME=${twitter_name}"
+heroku config:set "TDIARYNET_USER=${user_name}" `hconf TWITTER_KEY` `hconf TWITTER_SECRET` "TWITTER_NAME=${twitter_name}" --app "${app}"
 heroku domains:add "${user_name}.tdiary.net" --app "${app}"
 
 ### copying data to mongolab
@@ -34,7 +34,7 @@ cd ../tdiary/io/mongodb
 bundle exec bin/tdiary-mongodb-convert -c "${data}/tdiary.conf" -m "${mongo}"
 bundle exec bin/tdiary-mongodb-convert -s "${pwd}/lib/tdiary/style" -m "${mongo}" "${data}"
 cd "${pwd}"
-rm -rf "data/${app}"
+# rm -rf "data/${app}"
 
 ### starting web site
 echo "use "GitHub Integration" on Heroku"
