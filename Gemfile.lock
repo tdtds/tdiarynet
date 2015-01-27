@@ -7,9 +7,9 @@ GIT
 
 GIT
   remote: git://github.com/tdiary/tdiary-io-mongodb.git
-  revision: 942f655a3170ccddd3470d2ec9b90dd1593ed9b0
+  revision: 726aa6674768e5a445281164178a1ba04dfd377f
   specs:
-    tdiary-io-mongodb (4.1.1.1)
+    tdiary-io-mongodb (4.1.1.2)
       hikidoc
       mongoid
 
