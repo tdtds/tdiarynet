@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 require 'tdiary/application'
 require 'tdiary/rack/auth/omniauth'
+require 'memcachier'
+require 'dalli'
+require 'rack/session/dalli'
 
 TDiary::Application.configure do
 	config.builder do
-		use ::Rack::Session::Pool, expire_after: 2592000
+		use ::Rack::Session::Dalli, cache: Dalli::Client.new, expire_after: 2592000
 		use OmniAuth::Builder do
 			configure {|conf| conf.path_prefix = "/auth" }
 			provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
