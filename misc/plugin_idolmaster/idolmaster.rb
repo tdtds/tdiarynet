@@ -5,8 +5,6 @@ def brr; '<br style="clear: right;">'; end
 def brl; '<br style="clear: left;">'; end
 def brb; '<br style="clear: both;">'; end
 
-require 'pstore'
-
 def get_thumbnail( date, para )
 	thumb = ''
 	diary = @diaries[date]
@@ -31,8 +29,10 @@ end
 
 def category_list_items_elements( cat, max = 5, thumb_num = 0 )
 	category = {}
-	PStore::new( "#{@conf.data_path}/category/#{CGI::escape cat}" ).transaction do |db|
-		category = db['category']
+	transaction('category') do |db|
+		db.keys.each do |key|
+			category[key] = db.get(key)
+		end
 	end
 
 	count = 0
