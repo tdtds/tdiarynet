@@ -29,7 +29,7 @@ mongo=`heroku config:get MONGOLAB_URI --app "${app}"`
 mkdir "data/${app}"
 scp -r "tdiarynet:/home/tdiary/users/${user_name}/data/????" "data/${app}/"
 scp "tdiarynet:/home/tdiary/users/${user_name}/data/tdiary.conf" "data/${app}/"
-bundle exec tdiary-mongodb-convert -c "data/tdiary.conf" -m "${mongo}"
+bundle exec tdiary-mongodb-convert -c "data/${app}/tdiary.conf" -m "${mongo}"
 bundle exec tdiary-mongodb-convert -s "./lib/tdiary/style" -m "${mongo}" "data/${app}"
 # rm -rf "data/${app}"
 
