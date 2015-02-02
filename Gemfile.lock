@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/tdiary/tdiary-contrib.git
-  revision: 7130fd8169a41aab76ebd43d15d37580db60c05a
+  revision: c88e514bb41038d58c7e537ac51e066ba04dbb17
   specs:
     tdiary-contrib (4.1.1)
       tdiary
@@ -44,10 +44,10 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.9.0)
     columnize (0.9.0)
     connection_pool (2.1.1)
-    coveralls (0.7.3)
+    coveralls (0.7.8)
       multi_json (~> 1.10)
       rest-client (~> 1.7)
       simplecov (~> 0.9.1)
@@ -115,12 +115,12 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (2.0.0)
+    pry-byebug (3.0.0)
       byebug (~> 3.4)
       pry (~> 0.10)
     puma (2.11.0)
       rack (>= 1.1, < 2.0)
-    rack (1.6.0)
+    rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
     racksh (1.0.0)
@@ -150,7 +150,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sequel (4.18.0)
+    sequel (4.19.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -203,7 +203,7 @@ DEPENDENCIES
   pit
   pry-byebug
   puma
-  rack
+  rack (~> 1.5.0)
   racksh
   rake
   redcarpet
