@@ -30,7 +30,7 @@ end
 def category_list_items_elements( cat, max = 5, thumb_num = 0 )
 	category = {}
 	transaction('category') do |db|
-		JSON.parse(db.get(cat) || {}).each do |date, val|
+		JSON.parse(db.get(cat) || '{}').each do |date, val|
 			category[date] = val
 		end
 	end
