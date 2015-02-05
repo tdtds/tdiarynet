@@ -1,6 +1,8 @@
 ruby '2.2.0'
 gem 'tdiary-io-mongodb', github: 'tdiary/tdiary-io-mongodb'
 gem 'tdiary-contrib', github: 'tdiary/tdiary-contrib'
+gem 'tdiary-style-gfm'
+gem 'tdiary-style-rd'
 gem 'puma'
 gem 'omniauth'
 gem 'omniauth-twitter'
