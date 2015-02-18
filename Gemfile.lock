@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/tdiary/tdiary-contrib.git
-  revision: f8315ec60ab37c84eb963f9c5002f31368797ad2
+  revision: 0d79fb0ae755b23cf90bb3a215856549eac7aadd
   specs:
     tdiary-contrib (4.1.1)
       tdiary
@@ -25,7 +25,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
+    addressable (2.3.7)
     bson (2.3.0)
     builder (3.2.2)
     byebug (3.5.1)
@@ -111,7 +111,7 @@ GEM
     origin (2.1.1)
     phantomjs (1.9.8.0)
     pit (0.0.7)
-    posix-spawn (0.3.9)
+    posix-spawn (0.3.10)
     power_assert (0.2.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -120,7 +120,7 @@ GEM
     pry-byebug (3.0.1)
       byebug (~> 3.4)
       pry (~> 0.10)
-    puma (2.11.0)
+    puma (2.11.1)
       rack (>= 1.1, < 2.0)
     pygments.rb (0.6.2)
       posix-spawn (~> 0.3.6)
