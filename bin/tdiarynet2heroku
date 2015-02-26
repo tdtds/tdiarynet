@@ -31,8 +31,8 @@ scp -r "tdiarynet:/home/tdiary/users/${user_name}/data/????" "data/${app}/"
 scp "tdiarynet:/home/tdiary/users/${user_name}/data/tdiary.conf" "data/${app}/"
 bundle exec tdiary-mongodb-convert -c "data/${app}/tdiary.conf" -m "${mongo}"
 bundle exec tdiary-mongodb-convert -s "./lib/tdiary/style" -m "${mongo}" "data/${app}"
-git push "git@heroku.com:#{app}.git" master:master
-curl "http://#{app}.herokuapp.com" >/dev/null 2>&1
+git push "git@heroku.com:${app}.git" master:master
+curl "http://${app}.herokuapp.com" >/dev/null 2>&1
 heroku run bundle exec rake mongodb:index --app "${app}"
 # rm -rf "data/${app}"
 
@@ -41,7 +41,6 @@ echo "use "GitHub Integration" on Heroku"
 echo "  open https://dashboard.heroku.com/apps/${app}/code/github"
 echo "  and connect to tdtds/tdiarynet"
 echo "  and set automatic deploy without CI"
-echo "  then do manual deploy."
 echo
 
 ### setting up DNS and old images
