@@ -45,4 +45,4 @@ echo
 
 ### setting up DNS and old images
 echo "set DNS CNAME ${user_name} to ${app}.herokuapp.com."
-echo "make symlink of ${user_name} under ~/tdiary/users/www/userimages"
+echo "make directory ${user_name} under ~/var/backup"
