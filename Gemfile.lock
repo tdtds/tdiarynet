@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/tdiary/tdiary-contrib.git
-  revision: c7655c6b3e96cb4b561e7ae8a9f76e62556ed4d8
+  revision: 670c1091c27d7c58ee8c81d1df79563c68e78085
   specs:
     tdiary-contrib (4.1.2)
       tdiary
