@@ -2,6 +2,9 @@
 # default plugins for tDiary.Net
 #
 
+add_header_proc do
+	%Q[<meta name="viewport" content="width=device-width,initial-scale=1">]
+end
 add_footer_proc do
 	footer = '<div class="footer">This Diary is Running on <a href="http://www.tdiary.net/">tDiary.Net</a> 1st server. Hosted by <a href="http://www.interlink.or.jp/service/">インターリンク</a>&nbsp;<a href="http://hosting.interlink.or.jp/">ホスティング</a></div>'
 
