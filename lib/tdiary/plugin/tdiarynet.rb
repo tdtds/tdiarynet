@@ -21,12 +21,9 @@ def clear_tdiarynet_cache(date)
 	Net::HTTP::post_form(url, params)
 end
 
-add_update_proc do
-	if /^(append|replace)$/ =~ @mode
-		clear_tdiarynet_cache(@date)
-	end
-end
-
-if @mode == 'saveconf'
+case @mode
+when /^(append|replace|comment)$/ =~ @mode
+	clear_tdiarynet_cache(@date)
+when /^saveconf$/
 	clear_tdiarynet_cache(nil)
 end
