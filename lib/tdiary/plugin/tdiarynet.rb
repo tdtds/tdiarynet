@@ -1,10 +1,12 @@
 #
 # default plugins for tDiary.Net
 #
+require 'faraday'
 
 add_header_proc do
 	%Q[<meta name="viewport" content="width=device-width,initial-scale=1">]
 end
+
 add_footer_proc do
 	footer = '<div class="footer">This Diary is Running on <a href="http://www.tdiary.net/">tDiary.Net</a> 1st server. Hosted by <a href="http://www.interlink.or.jp/service/">インターリンク</a>&nbsp;<a href="http://hosting.interlink.or.jp/">ホスティング</a></div>'
 
@@ -13,4 +15,24 @@ add_footer_proc do
 	end
 
 	footer
+end
+
+def clear_tdiarynet_cache(date)
+	begin
+		url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
+		params = date ? {date: date.strftime('%Y%m%d')} : {}
+		Faraday.new(url: url).post(url.path, params)
+	rescue
+		@logger.error "#$!"
+	end
+end
+
+add_update_proc do
+	if /^(append|replace)$/ =~ @mode
+		clear_tdiarynet_cache(@date)
+	end
+end
+
+if @mode == 'saveconf'
+	clear_tdiarynet_cache(nil)
 end
