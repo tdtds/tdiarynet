@@ -26,7 +26,7 @@ def clear_tdiarynet_cache(date)
 end
 
 case @mode
-when /^(append|replace|comment)$/ =~ @mode
+when /^(append|replace|comment)$/
 	clear_tdiarynet_cache(@date)
 when /^saveconf$/
 	clear_tdiarynet_cache(nil)
