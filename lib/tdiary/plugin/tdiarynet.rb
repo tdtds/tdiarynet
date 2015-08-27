@@ -21,6 +21,7 @@ def clear_tdiarynet_cache(date)
 		params = date ? {date: date.strftime('%Y%m%d')} : {}
 		Net::HTTP::post_form(url, param)
 	rescue
+		puts $!
 		@logger.error "#$!"
 	end
 end
