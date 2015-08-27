@@ -28,6 +28,9 @@ end
 case @mode
 when /^(append|replace)$/
 	clear_tdiarynet_cache(@date)
+when /^comment$/
+	date = Time.local(*(@conf.request.params['date'].scan(/(\d\d\d\d)(\d\d)(\d\d)/).flatten))
+	clear_tdiarynet_cache(date)
 when /^saveconf$/
 	clear_tdiarynet_cache(nil)
 end
