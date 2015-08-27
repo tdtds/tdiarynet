@@ -27,6 +27,7 @@ end
 
 case @mode
 when /^(append|replace|comment)$/
+	puts "clear cache: #{@mode}: #{@date}"
 	clear_tdiarynet_cache(@date)
 when /^saveconf$/
 	clear_tdiarynet_cache(nil)
