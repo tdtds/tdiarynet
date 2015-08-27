@@ -16,11 +16,13 @@ add_footer_proc do
 end
 
 def clear_tdiarynet_cache(date)
-	url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
-	puts url
-	params = date ? {date: date.strftime('%Y%m%d')} : {}
-	puts params
-	puts Net::HTTP::post_form(url, params)
+	begin
+		url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
+		params = date ? {date: date.strftime('%Y%m%d')} : {}
+		Net::HTTP::post_form(url, params)
+	rescue
+		puts "clear_tdiarynet_cache: #$!"
+	end
 end
 
 case @mode
