@@ -1,8 +1,6 @@
 #
 # default plugins for tDiary.Net
 #
-require 'faraday'
-
 add_header_proc do
 	%Q[<meta name="viewport" content="width=device-width,initial-scale=1">]
 end
@@ -21,7 +19,7 @@ def clear_tdiarynet_cache(date)
 	begin
 		url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
 		params = date ? {date: date.strftime('%Y%m%d')} : {}
-		Faraday.new(url: url).post(url.path, params)
+		Net::HTTP::post_form(url, param)
 	rescue
 		@logger.error "#$!"
 	end
