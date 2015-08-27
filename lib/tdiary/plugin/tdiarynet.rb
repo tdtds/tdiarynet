@@ -17,8 +17,10 @@ end
 
 def clear_tdiarynet_cache(date)
 	url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
+	puts url
 	params = date ? {date: date.strftime('%Y%m%d')} : {}
-	Net::HTTP::post_form(url, params)
+	puts params
+	puts Net::HTTP::post_form(url, params)
 end
 
 case @mode
