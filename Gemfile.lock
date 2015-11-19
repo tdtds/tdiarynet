@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/tdiary/tdiary-contrib.git
-  revision: 857d0de8c49817501d080dee37b228b7b4566117
+  revision: 7b1a8bd6132a949e01633f164d3070b2d311ee49
   specs:
     tdiary-contrib (4.2.0)
+      ruby-pushbullet
       tdiary
 
 GIT
@@ -232,7 +233,6 @@ DEPENDENCIES
   rake
   redcarpet
   rspec
-  ruby-pushbullet
   selenium-webdriver
   sequel
   simplecov
