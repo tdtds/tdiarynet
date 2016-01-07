@@ -1,0 +1,30 @@
+{
+  "name": "tDiary.Net",
+  "description": "",
+  "scripts": {
+    "postdeploy": "bundle exec rake mongodb:index"
+  },
+  "env": {
+    "RACK_ENV": {
+      "required": true
+    },
+    "TDIARYNET_USER": {
+      "required": true
+    },
+    "TWITTER_KEY": {
+      "required": true
+    },
+    "TWITTER_NAME": {
+      "required": true
+    },
+    "TWITTER_SECRET": {
+      "required": true
+    }
+  },
+  "addons": [
+    "mongolab",
+    "sendgrid",
+    "logentries",
+    "memcachier"
+  ]
+}
