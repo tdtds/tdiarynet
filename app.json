@@ -1,6 +1,8 @@
 {
   "name": "tDiary.Net",
   "description": "",
+  "website": "http://www.tdiary.net/",
+  "repository:"https://github.com/tdtds/tdiarynet",
   "scripts": {
     "postdeploy": "bundle exec rake mongodb:index"
   },

@@ -13,5 +13,6 @@ vendor/bundle/
 spec/reports
 doc/*.html
 .rspec
+.ruby-version
 spec/javascripts/lib
 node_modules
