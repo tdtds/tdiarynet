@@ -16,10 +16,10 @@ app="tdiary-net-${user_name}"
 
 ### making an app on heroku
 heroku apps:create "${app}"
-heroku addons:add mongolab --as MONGOLAB --app "${app}"
-heroku addons:add sendgrid --app "${app}"
-heroku addons:add logentries --app "${app}"
-heroku addons:add memcachier --app "${app}"
+heroku addons:create mongolab --as MONGOLAB --app "${app}"
+heroku addons:create sendgrid --app "${app}"
+heroku addons:create logentries --app "${app}"
+heroku addons:create memcachier --app "${app}"
 heroku config:set "TDIARYNET_USER=${user_name}" `hconf TWITTER_KEY` `hconf TWITTER_SECRET` "TWITTER_NAME=${twitter_name}" --app "${app}"
 heroku domains:add "${user_name}.tdiary.net" --app "${app}"
 
