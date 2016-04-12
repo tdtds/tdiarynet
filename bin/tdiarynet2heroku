@@ -16,7 +16,7 @@ app="tdiary-net-${user_name}"
 
 ### making an app on heroku
 heroku apps:create "${app}"
-heroku addons:add mongolab --app "${app}"
+heroku addons:add mongolab --as MONGOLAB --app "${app}"
 heroku addons:add sendgrid --app "${app}"
 heroku addons:add logentries --app "${app}"
 heroku addons:add memcachier --app "${app}"
