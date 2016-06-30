@@ -1,4 +1,3 @@
-# -*- coding: utf-8; -*-
 #
 # defaultio.rb: tDiary IO class for tDiary 2.x - 4.x format.
 #
@@ -220,13 +219,10 @@ module TDiary
 
 			def calendar
 				calendar = {}
-				Dir["#{@data_path}????"].sort.each do |dir|
-					next unless %r[/\d{4}$] =~ dir
-					Dir["#{dir.untaint}/??????.td2"].sort.each do |file|
-						year, month = file.scan( %r[/(\d{4})(\d\d)\.td2$] )[0]
-						next unless year
-						calendar[year] = [] unless calendar[year]
-						calendar[year] << month
+				Dir["#{@data_path}????/??????.td2"].sort.each do |file|
+					if file =~ /(\d{4})(\d{2})\.td2$/
+						calendar[$1] = [] unless calendar[$1]
+						calendar[$1] << $2
 					end
 				end
 				calendar

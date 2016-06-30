@@ -1,17 +1,21 @@
 source 'https://rubygems.org'
 
 gem 'rack'
-gem 'sprockets'
 gem 'hikidoc'
 gem 'fastimage'
 gem 'emot'
 gem 'mail'
 gem 'rake'
 
+group :rack do
+  gem 'sprockets'
+end
+
 group :development do
   gem 'pit', require: false
   gem 'racksh', require: false
   gem 'redcarpet'
+  gem 'octokit'
 
   group :test do
     gem 'pry-byebug', platforms: [:ruby_20, :ruby_21]
