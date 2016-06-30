@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 require 'tdiary'
+require 'tdiary/extensions/core'
 require 'rack/builder'
 require 'tdiary/rack'
 
