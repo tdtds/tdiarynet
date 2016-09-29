@@ -331,14 +331,27 @@ def default_ogp
 		uri = @conf.index.dup
 		uri[0, 0] = base_url if %r|^https?://|i !~ @conf.index
 		uri.gsub!( %r|/\./|, '/' )
-		image = File.join(uri, "#{theme_url}/ogimage.png")
+		image = @conf.banner.nil? ? File.join(uri, "#{theme_url}/ogimage.png") : @conf.banner
+		ogp = {
+			'og:title' => title_tag.gsub(/<[^>]*>/, ""),
+			'og:image' => (h image),
+		}
+		ogp['fb:app_id'] = @conf['ogp.facebook.app_id']
+		ogp['fb:admins'] = @conf['ogp.facebook.admins']
 		if @mode == 'day' then
-			uri += anchor( @date.strftime( '%Y%m%d' ) )
+			ogp['og:type'] = 'article'
+			ogp['article:author'] = @conf.author_name
+			ogp['og:site_name'] = @conf.html_title
+			ogp['og:url'] = h(uri + anchor( @date.strftime( '%Y%m%d' ) ))
+		else
+			ogp['og:type'] = 'website'
+			ogp['og:description'] = h(@conf.description)
+			ogp['og:url'] = h(uri)
 		end
-		%Q[<meta content="#{title_tag.gsub(/<[^>]*>/, "")}" property="og:title">
-		<meta content="#{(@mode == 'day') ? 'article' : 'website'}" property="og:type">
-		<meta content="#{h image}" property="og:image">
-		<meta content="#{h uri}" property="og:url">]
+
+		ogp.map { |k, v|
+			%Q|<meta property="#{k}" content="#{v}">|
+		}.join("\n")
 	end
 end
 
@@ -714,7 +727,7 @@ def comment_mail_send
 		rmail = File::open( "#{TDiary::PATH}/../views/mail.rtxt" ){|f| f.read }
 	end
 	text = @conf.to_mail( ERB::new( rmail.untaint ).result( binding ) )
-	receivers.each { |i| i.untaint }
+	receivers.each(&:untaint)
 	comment_mail( text, receivers )
 end
 
@@ -771,8 +784,8 @@ end
 # header/footer (header)
 def saveconf_header
 	if @mode == 'saveconf' then
-		@conf.header = @conf.to_native( @cgi.params['header'][0] ).lines.map{|s| s.chomp}.join( "\n" ).sub( /\n+\z/, '' )
-		@conf.footer = @conf.to_native( @cgi.params['footer'][0] ).lines.map{|s| s.chomp}.join( "\n" ).sub( /\n+\z/, '' )
+		@conf.header = @conf.to_native( @cgi.params['header'][0] ).lines.map(&:chomp).join( "\n" ).sub( /\n+\z/, '' )
+		@conf.footer = @conf.to_native( @cgi.params['footer'][0] ).lines.map(&:chomp).join( "\n" ).sub( /\n+\z/, '' )
 	end
 end
 

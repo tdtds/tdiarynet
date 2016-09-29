@@ -54,20 +54,32 @@ class AmazonItem
 	def initialize(xml, parser = :rexml)
 		@parser = parser
 		if parser == :oga
-			doc = Oga.parse_xml(xml)
-			@item = doc.xpath('*/*/Item')[0]
+			@doc = Oga.parse_xml(xml)
+			@item = @doc.xpath('*/*/Item')[0]
 		else
-			doc = REXML::Document::new( REXML::Source::new( xml ) ).root
-			@item = doc.elements.to_a( '*/Item' )[0]
+			@doc = REXML::Document::new( REXML::Source::new( xml ) ).root
+			@item = @doc.elements.to_a( '*/Item' )[0]
 		end
 	end
 
 	def nodes(path)
 		if @parser == :oga
-			@item.xpath(path)
+			if @item
+				@item.xpath(path)
+			else
+				@doc.xpath(path)
+			end
 		else
-			@item.elements.to_a(path)
+			if @item
+				@item.elements.to_a(path)
+			else
+				@doc.elements.to_a(path)
+			end
 		end
+	end
+
+	def has_item?
+		!@item.nil?
 	end
 end
 
@@ -289,11 +301,11 @@ def amazon_get( asin, with_image = true, label = nil, pos = 'amazon' )
 	rescue NoMethodError
 		message = label || asin
 		if @mode == 'preview' then
-			if item == nil then
+			if item.has_item? then
+				message << %Q|<span class="message">(#{h $!}\n#{h $@.join( ' / ' )})</span>|
+			else
 				m = item.nodes( 'Items/Request/Errors/Error/Message' )[0].text
 				message << %Q|<span class="message">(#{h @conf.to_native( m, 'utf-8' )})</span>|
-			else
-				message << %Q|<span class="message">(#{h $!}\n#{h $@.join( ' / ' )})</span>|
 			end
 		end
 		message
