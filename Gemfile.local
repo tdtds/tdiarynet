@@ -10,6 +10,3 @@ gem 'dalli'
 gem 'memcachier'
 #gem 'heroku'
 gem 'octokit'
-
-# avoid error on gfm-style
-gem 'twitter-text', '= 1.14.2'
