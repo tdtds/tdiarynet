@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tdiary/tdiary-contrib.git
-  revision: b3a97d6944b678ba3d85c7bef1d8922003c64743
+  revision: 8299b30cbf3f372d9fc47ac248a840aca97bfa3a
   specs:
     tdiary-contrib (5.0.3)
       ruby-pushbullet
@@ -28,7 +28,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     bson (4.2.1)
     byebug (9.0.6)
-    capybara (2.12.1)
+    capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -86,7 +86,7 @@ GEM
     multi_json (1.12.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
-    nokogiri (1.7.0.1)
+    nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     oauth (0.5.1)
     octokit (4.6.2)
@@ -111,7 +111,7 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     public_suffix (2.0.5)
-    puma (3.7.1)
+    puma (3.8.2)
     rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -146,7 +146,7 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    selenium-webdriver (3.2.2)
+    selenium-webdriver (3.3.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
@@ -233,7 +233,7 @@ DEPENDENCIES
   test-unit
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.4
+   1.14.6
