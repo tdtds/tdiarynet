@@ -210,7 +210,7 @@ add_header_proc do
 	#{author_mail_tag}
 	#{index_page_tag}
 	#{icon_tag}
-	#{default_ogp}
+	#{ogp_tag}
 	#{description_tag}
 	#{css_tag.chomp}
 	#{jquery_tag.chomp}
@@ -322,37 +322,29 @@ def icon_tag
 	end
 end
 
-def default_ogp
-	if @conf.options2['sp.selected'] && @conf.options2['sp.selected'].include?('ogp.rb')
-		if defined?(@conf.banner)
-			%Q[<meta content="#{base_url}images/ogimage.png" property="og:image">]
-		end
+def ogp_tag
+	uri = @conf.index.dup
+	uri[0, 0] = base_url if %r|^https?://|i !~ @conf.index
+	uri.gsub!( %r|/\./|, '/' )
+	image = (@conf.banner.nil? || @conf.banner == '') ? File.join(uri, "#{theme_url}/ogimage.png") : @conf.banner
+	ogp = {
+		'og:title' => title_tag.gsub(/<[^>]*>/, ""),
+		'og:image' => image,
+	}
+	if @mode == 'day' then
+		ogp['og:type'] = 'article'
+		ogp['article:author'] = @conf.author_name
+		ogp['og:site_name'] = @conf.html_title
+		ogp['og:url'] = uri + anchor( @date.strftime( '%Y%m%d' ) )
 	else
-		uri = @conf.index.dup
-		uri[0, 0] = base_url if %r|^https?://|i !~ @conf.index
-		uri.gsub!( %r|/\./|, '/' )
-		image = @conf.banner.nil? ? File.join(uri, "#{theme_url}/ogimage.png") : @conf.banner
-		ogp = {
-			'og:title' => title_tag.gsub(/<[^>]*>/, ""),
-			'og:image' => (h image),
-		}
-		ogp['fb:app_id'] = @conf['ogp.facebook.app_id']
-		ogp['fb:admins'] = @conf['ogp.facebook.admins']
-		if @mode == 'day' then
-			ogp['og:type'] = 'article'
-			ogp['article:author'] = @conf.author_name
-			ogp['og:site_name'] = @conf.html_title
-			ogp['og:url'] = h(uri + anchor( @date.strftime( '%Y%m%d' ) ))
-		else
-			ogp['og:type'] = 'website'
-			ogp['og:description'] = h(@conf.description)
-			ogp['og:url'] = h(uri)
-		end
-
-		ogp.map { |k, v|
-			%Q|<meta property="#{k}" content="#{v}">|
-		}.join("\n")
+		ogp['og:type'] = 'website'
+		ogp['og:description'] = @conf.description
+		ogp['og:url'] = uri
 	end
+
+	ogp.map { |k, v|
+		%Q|<meta property="#{k}" content="#{h(v)}">|
+	}.join("\n")
 end
 
 def description_tag
@@ -364,7 +356,7 @@ def description_tag
 end
 
 def jquery_tag
-	%Q[<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>]
+	%Q[<script src="//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>]
 end
 
 enable_js( '00default.js', async: false )
@@ -406,10 +398,10 @@ def theme_url
 end
 
 def css_tag
+	location, name = (@conf.theme || '').split(%r[/], 2)
 	if @mode =~ /conf$/ then
 		css = "#{h theme_url}/conf.css"
-	elsif @conf.theme and @conf.theme.length > 0
-		location, name = @conf.theme.split(%r[/], 2)
+	elsif name && name.length > 0
 		css = __send__("theme_url_#{location}", name)
 		css = theme_url_local('default') unless css # the location is not defined
 	else
@@ -974,7 +966,7 @@ def saveconf_recommendfilter
 		@conf['spamfilter.max_uris'] = "1"
 		@conf['spamfilter.resolv_check'] = true
 		@conf['spamfilter.resolv_check_mode'] = false
-		@conf['spamlookup.domain.list'] = "bsb.spamlookup.net\r\nsc.surbl.org\r\nrbl.bulkfeeds.jp"
+		@conf['spamlookup.domain.list'] = "bsb.spamlookup.net\r\nmulti.surbl.org\r\nrbl.bulkfeeds.jp"
 		@conf['spamlookup.ip.list'] = "dnsbl.spam-champuru.livedoor.com"
 		@conf['spamlookup.safe_domain.list'] = "www.google.com\r\nwww.google.co.jp\r\nezsch.ezweb.ne.jp\r\nwww.yahoo.co.jp\r\nsearch.mobile.yahoo.co.jp\r\nwww.bing.com"
 	end
