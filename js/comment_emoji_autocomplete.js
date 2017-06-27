@@ -42,7 +42,7 @@ $(function() {
    }
 
    $( "textarea[name=body]" )
-      .bind( "keydown", function( event ) {
+      .on( "keydown", function( event ) {
          if ( event.keyCode === $.ui.keyCode.TAB &&
             $( this ).data( "autocomplete" ).menu.active ) {
             event.preventDefault();
@@ -101,7 +101,7 @@ $(function() {
 
          if (png_basename == '+1'){ png_basename = 'plus1' }
 
-         icon_img = $("<img>").attr('src', 'http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/' + png_basename + '.png')
+         icon_img = $("<img>").attr('src', '//www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/' + png_basename + '.png')
          .css('width', '20').css('height', '20');
 
       }
