@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/tdiary/tdiary-contrib.git
-  revision: a40096d3fb487a38619e8f24d11367ae59b50238
+  revision: 4d584f3a84096d65d06834cd8245422c8b725459
   specs:
     tdiary-contrib (5.0.7)
       pushbullet_ruby
@@ -115,7 +115,7 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.1)
     puma (3.11.0)
-    pushbullet_ruby (1.1.2)
+    pushbullet_ruby (1.1.3)
       faraday (~> 0.13.0)
       mime-types
     rack (1.6.8)
