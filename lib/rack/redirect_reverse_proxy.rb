@@ -10,7 +10,7 @@ module Rack
 			if env['REQUEST_PATH'] !~ %r|\A/update\.rb| && @address != env['HTTP_X_FORWARDED_FOR']
 				[
 					301,
-					{'location' => "http://sho.tdiary.net#{env['REQUEST_PATH']}"},
+					{'location' => "http://#{ENV['TDIARYNET_USER']}.tdiary.net#{env['REQUEST_PATH']}"},
 					[]
 				]
 			else
