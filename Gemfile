@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rack', '~> 1.6' # ~> 2.0 requires ruby 2.2.2 or later.
+gem 'rack', '~> 2.0' # ~> 2.0 requires ruby 2.2.2 or later.
 gem 'hikidoc'
 gem 'fastimage'
 gem 'emot'
@@ -17,13 +17,13 @@ group :development do
   gem 'redcarpet'
   gem 'octokit'
 
-  platforms :ruby_22, :ruby_23, :ruby_24 do
+  platforms :ruby_23, :ruby_24 do
     gem 'ruby-debug-ide'
     gem 'debase'
   end
 
   group :test do
-    gem 'pry-byebug', platforms: [:ruby_22, :ruby_23, :ruby_24]
+    gem 'pry-byebug', platforms: [:ruby_23, :ruby_24]
     gem 'test-unit'
     gem 'rspec'
     gem 'capybara', require: 'capybara/rspec'
@@ -31,9 +31,9 @@ group :development do
     gem 'launchy'
     gem 'sequel'
     gem 'sqlite3'
-    gem 'jasmine'
+    gem 'jasmine', '< 3'
     gem 'simplecov', require: false
-    gem 'coveralls', '~> 0.7.12', require: false
+    gem 'coveralls', require: false
   end
 end
 

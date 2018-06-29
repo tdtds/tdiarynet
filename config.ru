@@ -1,4 +1,4 @@
-$:.unshift( File.join(File::expand_path(File::dirname( __FILE__ )), 'lib' ).untaint )
+$:.unshift( File.join(File::expand_path(File::dirname( __FILE__ )), 'lib' ) )
 require 'tdiary/application'
 
 require 'rack/redirect_reverse_proxy'
