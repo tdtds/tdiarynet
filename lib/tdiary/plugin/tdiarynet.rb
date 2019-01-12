@@ -13,7 +13,7 @@ end
 
 def clear_tdiarynet_cache(date)
 	begin
-		url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
+		url = URI("http://proxy2.tdiary.net/cache/#{@conf.user_name}")
 		params = {}
 		if date
 			dates = date.strftime('%Y%m%d')
