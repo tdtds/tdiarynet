@@ -14,10 +14,16 @@ end
 def clear_tdiarynet_cache(date)
 	begin
 		url = URI("http://proxy.tdiary.net/cache/#{@conf.user_name}")
-		params = date ? {date: date.strftime('%Y%m%d')} : {}
+		params = {}
+		if date
+			dates = date.strftime('%Y%m%d')
+			dates << ",#{@prev_date}" if @prev_date
+			dates << ",#{@next_date}" if @next_date
+			params[:date] = dates
+		end
 		Net::HTTP::post_form(url, params)
 	rescue
-		puts "clear_tdiarynet_cache: #$!"
+		puts "E: clear_tdiarynet_cache: #$!"
 	end
 end
 
