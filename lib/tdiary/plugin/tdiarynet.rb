@@ -16,14 +16,34 @@ def clear_tdiarynet_cache(date)
 		url = URI("http://proxy2.tdiary.net/cache/#{@conf.user_name}")
 		params = {}
 		if date
-			dates = date.strftime('%Y%m%d')
-			dates << ",#{@prev_date}" if @prev_date
-			dates << ",#{@next_date}" if @next_date
-			params[:date] = dates
+			today = date.strftime('%Y%m%d')
+			this_month = today[0,6]
+			days = []
+			yms = []
+
+			@years.keys.each{|y|	yms += @years[y].collect {|m| y + m}}
+			yms |= [this_month]
+			yms.sort!
+			yms.unshift(nil).push(nil)
+			yms[yms.index(this_month) - 1, 3].each do |ym|
+				next unless ym
+				now = @cgi.params['date'] # backup
+				cgi = @cgi.clone
+				cgi.params['date'] = [ym]
+				m = TDiaryMonthWithoutFilter.new(cgi, '', @conf)
+				@cgi.params['date'] = now # restore
+				m.diaries.delete_if {|date,diary| !diary.visible?}
+				days += m.diaries.keys.sort
+			end
+			days |= [today]
+			days.sort!
+			days.unshift(nil).push(nil)
+			params[:date] = days[days.index(today)-1, 3].compact.join(',')
+			puts "I, clear_tdiarynet_cache: clear request #{params[:date]}"
 		end
 		Net::HTTP::post_form(url, params)
 	rescue
-		puts "E: clear_tdiarynet_cache: #$!"
+		puts "E, clear_tdiarynet_cache: #$!"
 	end
 end
 
