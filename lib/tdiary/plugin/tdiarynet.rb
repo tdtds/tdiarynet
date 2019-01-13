@@ -14,6 +14,7 @@ end
 def clear_tdiarynet_cache(date)
 	begin
 		url = URI("http://proxy2.tdiary.net/cache/#{@conf.user_name}")
+		puts "I, request to clear URL: #{url}"
 		params = {}
 		if date
 			today = date.strftime('%Y%m%d')
