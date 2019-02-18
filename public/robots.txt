@@ -1,2 +1,8 @@
-User-Agent:*
+User-Agent: *
 Disallow: /update.rb
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
