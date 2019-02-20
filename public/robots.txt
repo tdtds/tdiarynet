@@ -1,6 +1,12 @@
 User-Agent: *
 Disallow: /update.rb
 
+User-agent: bingbot
+Crawl-Delay: 60
+
+User-agent: ia_archiver
+Crawl-Delay: 60
+
 User-agent: SemrushBot
 Disallow: /
 
