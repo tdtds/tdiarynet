@@ -1,3 +1,13 @@
+2019-08-15  HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+	* amazon.rb: support HTTP Found response and discard wrong stored cache
+
+2019-06-29  SHIBATA Hiroshi <hsbt@ruby-lang.org>
+	* release 5.0.14
+
+2019-05-15  Tada, Tadashi <t@tdtds.jp>
+	* update jQuery to 3.4.1
+	* amazon.rb: fix default image to https
+
 2019-04-03  Tada, Tadashi <t@tdtds.jp>
 	* release 5.0.13
 
