@@ -117,10 +117,10 @@ def amazon_call_ecs( asin, id_type, country )
 	url << "&ResponseGroup=Medium"
 	url << "&Version=#{@amazon_require_version}"
 
-	limit = 10
+	limit = 5
 	begin
-		Timeout.timeout( limit ) do
-			amazon_fetch( url )
+		Timeout.timeout(5) do
+			amazon_fetch(url, limit)
 		end
 	rescue AmazonRedirectError
 		limit = $!.message.to_i
