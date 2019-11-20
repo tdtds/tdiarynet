@@ -95,7 +95,7 @@ def amazon_fetch( url, limit = 10 )
 	when Net::HTTPRedirection, Net::HTTPFound
 		amazon_fetch( res['location'], limit - 1 )
 	when Net::HTTPForbidden, Net::HTTPServiceUnavailable
-		raise AmazonRedirectError.new( limit.to_s )
+		raise AmazonRedirectError.new((limit - 1).to_s)
 	else
 		raise ArgumentError, res.error!
 	end
