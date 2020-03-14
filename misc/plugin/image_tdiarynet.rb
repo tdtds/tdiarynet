@@ -10,7 +10,7 @@ add_body_enter_proc do |date|
 end
 
 def image_url(date, id)
-	"http://userimages.tdiary.net/#{@conf.user_name}/#{date}_#{h id}.jpg"
+	"https://userimages.tdiary.net/#{@conf.user_name}/#{date}_#{h id}.jpg"
 end
 
 def image(id, alt = 'image', thumbnail = nil, size = nil, place = 'photo')
