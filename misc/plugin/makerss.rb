@@ -761,7 +761,12 @@ def absolutify(html, baseurl)
 				begin
 					uri = URI.parse(location)
 					if uri.relative?
-						location = (baseuri + location).to_s
+						begin
+							location = (baseuri + location).to_s
+						rescue URI::BadURIError
+							p baseuri, location
+							raise
+						end
 					elsif not uri.host and uri.path
 						path = uri.path
 						path += '?' + uri.query if uri.query
@@ -769,7 +774,7 @@ def absolutify(html, baseurl)
 						location = (baseuri + path).to_s
 					end
 					tag = prefix + location + postfix
-				rescue URI::InvalidURIError
+				rescue URI::InvalidURIError, URI::BadURIError
 				end
 			end
 		end
