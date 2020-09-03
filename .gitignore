@@ -16,3 +16,5 @@ doc/*.html
 .ruby-version
 spec/javascripts/lib
 node_modules
+public/assets
+tdiary.pid
