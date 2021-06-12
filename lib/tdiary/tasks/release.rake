@@ -50,15 +50,12 @@ begin
 				end
 
 				Dir.chdir '.bundle/ruby' do
-					versions = %w(2.5.0 2.6.0 2.7.0)
+					versions = %w(2.6.0 2.7.0 3.0.0)
 					current = `ls`.chomp
 					versions.each {|version|
 						FileUtils.cp_r current, version unless current == version
 					}
 					FileUtils.rm_rf current unless versions.member?(current)
-				end
-				Dir.chdir 'misc/lib' do
-					sh 'gem unpack bundler'
 				end
 			end
 		end
