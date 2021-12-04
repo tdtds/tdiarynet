@@ -1,4 +1,4 @@
-ruby '~> 3.0.1'
+ruby '~> 3.0.3'
 gem 'puma', require: false
 gem 'tdiary-io-mongodb', git: 'https://github.com/tdiary/tdiary-io-mongodb.git'
 gem 'tdiary-contrib', git: 'https://github.com/tdiary/tdiary-contrib.git'
@@ -6,6 +6,6 @@ gem 'tdiary-style-gfm'
 gem 'tdiary-style-rd'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'dalli'
+gem 'dalli', '< 3'
 gem 'memcachier'
 gem 'octokit'
